@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="WPF_MVVMLight_CRUD.Views.SaveEmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" Height="320.301" Width="450"
+             DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="78*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="106*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock TextWrapping="Wrap" Text="EmpNo:"/>
+        <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="EmpName:"/>
+        <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Salary:"/>
+        <TextBlock Grid.Row="3" TextWrapping="Wrap" Text="DeptName:"/>
+        <TextBlock Grid.Row="4" TextWrapping="Wrap" Text="Designation:"/>
+
+        <TextBox Grid.Column="1" TextWrapping="Wrap" Text="{Binding EmpInfo.EmpNo,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{Binding EmpInfo.EmpName,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" Text="{Binding EmpInfo.Salary,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" Text="{Binding EmpInfo.DeptName,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" Text="{Binding EmpInfo.Designation,Mode=TwoWay}"/>
+        <Button Content="Save Employee" FontSize="20" 
+                FontWeight="Bold" Grid.Row="5"
+                Grid.ColumnSpan="2"
+                 Command="{Binding SaveCommand}" CommandParameter="{Binding EmpInfo}"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="WPF_MVVMLight_CRUD.Views.EmployeeInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+        xmlns:ignore="http://www.ignore.com"
+        mc:Ignorable="d ignore"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" Height="446.866" Width="617.015">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="51*"/>
+            <RowDefinition Height="42*"/>
+            <RowDefinition Height="283*"/>
+            <RowDefinition Height="71*"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap"
+                    TextAlignment="Center" Text="List of All Employees" FontWeight="Bold" FontSize="30"/>
+        <Button x:Name="btnloadallemployees" Content="List All Employees"
+                Grid.Row="3" FontSize="30"
+                FontWeight="Bold"
+                 Command="{Binding ReadAllCommand}"/>
+        <DataGrid x:Name="dgemp" Grid.Row="2" ItemsSource="{Binding Employees}" 
+                 ColumnWidth="*"  Margin="0,10,0,28" RenderTransformOrigin="0.5,0.5"
+                   IsReadOnly="True" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <mvvm:EventToCommand 
+                    Command="{Binding  SendEmployeeCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=dgemp,Path=SelectedItem}"    
+                     />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1" 
+                   TextWrapping="Wrap" Text="EmpName to Search:" VerticalAlignment="Top" 
+                   Width="231"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="262,7,0,0" 
+                 Grid.Row="1" TextWrapping="Wrap"  Text="{Binding EmpName, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top" Width="310">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <mvvm:EventToCommand 
+                    Command="{Binding SearchCommand, Mode=OneWay}"
+                     />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+    </Grid>
+</UserControl>
